@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLR Parser</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>SLR Parser</h1>
+        
+        <section class="input-section">
+            <h2>Upload Grammar</h2>
+            <textarea id="grammarInput" placeholder="S -> AB\nA -> a\nB -> b"></textarea>
+            <button onclick="uploadGrammar()">Upload Grammar</button>
+        </section>
+        
+        <section class="input-section">
+            <h2>Upload Parsing Table (JSON Format)</h2>
+            <textarea id="tableInput" placeholder='{"0": {"a": ["shift", 1], "$": ["accept", null]}}'></textarea>
+            <button onclick="uploadTable()">Upload Table</button>
+        </section>
+        
+        <section class="parsing-section">
+            <h2>Step-by-Step Parsing</h2>
+            <form id="parseForm">
+                <label for="inputString">Input String:</label>
+                <input type="text" id="inputString" name="inputString" required>
+                <button type="submit">Start Parsing</button>
+            </form>
+            
+            <div id="parserControls" class="hidden">
+                <button id="nextStep">Next Step</button>
+                <button id="restart" onclick="restartParsing()">Restart</button>
+            </div>
+        </section>
+        
+        <section class="table-section">
+            <h2>Parsing Table</h2>
+            <table id="parsingTable">
+                <thead>
+                    <tr>
+                        <th>Stack</th>
+                        <th>Remaining Input</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+        
+        <div id="result"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
